@@ -8,6 +8,17 @@
   },
   "license": "MIT",
   "author": "kojiroSchatten",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": false,
+    "tabWidth": 4,
+    "trailingComma": "none"
+  },
   "scripts": {
     "format": "prettier --write \"**/*.{js,jsx,tsx,ts,css}\"",
     "dev": "next dev",
