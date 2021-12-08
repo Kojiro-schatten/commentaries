@@ -1,13 +1,14 @@
-import React from 'react'
-import { Challenge } from '../../types/index'
+import React from "react";
+import { Challenge } from "../../types/index";
 
 const Commentary = (props: Challenge) => {
-  console.log(props)
+  console.log(props);
   return (
     <div>
-      {props.commentary}
+      {props.example}
+      <p>{props.commentary}</p>
     </div>
-  )
-}
+  );
+};
 
-export default Commentary
+export default Commentary;

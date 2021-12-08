@@ -4,27 +4,34 @@
       "challenge_name": "Pick",
       "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/4-easy-pick/README.md",
       "type": "type_challenges",
-      "commentary":"type MyPick<T, K extends keyof T> = {[key in K]: T[key]}"
+      "example": "type MyPick<T, K extends keyof T> = {[key in K]: T[key]}",
+      "commentary":"ここに解説が入ります"
     },
     {
         "rowIndex": 3,
         "challenge_name": "ReadOnly",
         "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/7-easy-readonly/README.md",
         "type": "type_challenges",
-        "commentary": "type MyReadonly<K> = { readonly [key in keyof K]: K[key]}"
+        "example": "type MyReadonly<K> = { readonly [key in keyof K]: K[key]}",
+      "commentary":"ここに解説が入ります"
+
     },
     {
         "rowIndex": 4,
         "challenge_name": "Tuple to Object",
         "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/11-easy-tuple-to-object/README.md",
         "type": "type_challenges",
-        "commentary": "type TupleToObject<T extends readonly string[]> = { [K in T[number]]: K }"
+        "example": "type TupleToObject<T extends readonly string[]> = { [K in T[number]]: K }",
+      "commentary":"ここに解説が入ります"
+
     },
     {
         "rowIndex": 5,
         "challenge_name": "First of Array",
         "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/14-easy-first/README.md",
         "type": "type_challenges",
-        "commentary": "type First<T extends any[]> = T['length'] extends 0 ? never : T[0];"
+        "example": "type First<T extends any[]> = T['length'] extends 0 ? never : T[0];",
+      "commentary":"ここに解説が入ります"
+
   }
 ]
