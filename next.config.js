@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   images: {
-    domains: ["files.speakerdeck.com"]
+    domains: ["files.speakerdeck.com", "picsum.photos"]
   }
 };
