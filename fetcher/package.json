@@ -1,7 +1,6 @@
 {
-  "name": "company-introduction",
   "version": "1.0.0",
-  "description": "",
+  "description": "fetcher",
   "private": true,
   "repository": {
     "type": "git"
