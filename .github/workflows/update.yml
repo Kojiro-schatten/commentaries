@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 14
       - name: Update Data
-        run: yarn install && yarn update-data
+        run: yarn install && yarn update
         env:
           ENV_SHEETSON: ${{ secrets.ENV_SHEETSON }}
         working-directory: fetcher/
