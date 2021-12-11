@@ -1,6 +1,5 @@
 import challenge from "./challenges.json";
 import { useCallback, useState } from "react";
-
 import Challenge from "../components/Challenge";
 import { ModalProvider } from "react-modal-hook";
 import LeftContent from "../components/LeftContent";
@@ -33,6 +32,19 @@ function HomePage() {
         }
       `}</style>
       <style jsx>{`
+        .Header {
+          z-index: 1;
+          display: flex;
+          justify-content: flex-end;
+          align-content: center;
+          align-items: center;
+          position: fixed;
+          width: 98%;
+          margin: auto;
+          font-size: 18px;
+          padding: 0 8px;
+          color: #fff;
+        }
         .Grid {
           display: grid;
           grid-gap: 10px;
@@ -60,46 +72,16 @@ function HomePage() {
         .GridItem {
           padding: 10px;
         }
-        .Footer {
-          position: fixed;
-          bottom: 0;
-          width: 98%;
-          margin: auto;
-          font-size: 16px;
-          padding: 0 8px;
-          color: #fff;
-          background-color: rgba(0, 0, 0, 0.15);
-        }
-        .Footer {
-          display: flex;
-          justify-content: flex-end;
-          align-content: center;
-          align-items: center;
-        }
-        .FooterController,
-        .FooterModeChanger,
-        .FooterInformation {
-          display: inline-block;
-        }
-        .FooterInformation {
-          margin-left: auto;
-        }
-        .FooterControllerButton {
-          appearance: none;
-          border: 0;
-          border-radius: 8px;
-          background: transparent;
-          padding: 8px 16px;
-          font-size: 16px;
-        }
-        .LinkWithIcon {
-          display: inline-flex;
-          align-content: center;
-          align-items: center;
-          padding-right: 4px;
-          font-size: 16px;
-        }
       `}</style>
+      <header className={"Header"}>
+        <div className={"HeaderModeChanger"}>
+          <Toggle
+            left={{ label: "解答付き", value: "list" }}
+            right={{ label: "問題", value: "grid" }}
+            onChange={onChangeMode}
+          />
+        </div>
+      </header>
       <div className={`Grid ${mode === "list" ? "Grid--List" : "Grid--Grid"}`}>
         {challenge.map((c) => {
           if (mode === "list") {
@@ -117,15 +99,6 @@ function HomePage() {
           );
         })}
       </div>
-      <footer className={"Footer"}>
-        <div className={"FooterModeChanger"}>
-          <Toggle
-            left={{ label: "List", value: "list" }}
-            right={{ label: "Grid", value: "grid" }}
-            onChange={onChangeMode}
-          />
-        </div>
-      </footer>
     </div>
   );
 }

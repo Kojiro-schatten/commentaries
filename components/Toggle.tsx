@@ -7,11 +7,10 @@ type ToggleProps = {
 };
 
 const Toggle = (props: ToggleProps) => {
-  console.log(props.left, props.right, props?.onChange)
   const [checked, setChecked] = useState(props.left.value);
   const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setChecked(event.target.value);
-    props?.onChange(event.target.value);
+    props.onChange(event.target.value);
   };
   return (
     <>
@@ -34,8 +33,8 @@ const Toggle = (props: ToggleProps) => {
         }
         .switch-field label {
           display: inline-block;
-          width: 100px;
-          background-color: #e4e4e4;
+          width: 140px;
+          background-color: #ffffff;
           color: rgba(0, 0, 0, 0.6);
           font-size: 14px;
           font-weight: normal;
@@ -50,7 +49,7 @@ const Toggle = (props: ToggleProps) => {
           cursor: pointer;
         }
         .switch-field input:checked + label {
-          background-color: #1955a5;
+          background-color: #5db400;
           color: #fff;
           box-shadow: none;
         }

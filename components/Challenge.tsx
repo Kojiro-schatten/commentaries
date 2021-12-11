@@ -40,25 +40,43 @@ const Challenge = (props: Challenge) => {
           place-items: center;
         }
         .Challenge a {
-          color: #0078b4;
+          color: #5db400;
+        }
+        .ModalButton {
+          font-size: 1rem;
+          font-weight: 700;
+          line-height: 1.5;
+          position: relative;
+          display: inline-block;
+          padding: 1rem 4rem;
+          cursor: pointer;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          -webkit-transition: all 0.3s;
+          transition: all 0.3s;
+          text-align: center;
+          vertical-align: middle;
+          text-decoration: none;
+          letter-spacing: 0.1em;
+          color: #ffffff;
+          border: none;
+          border-radius: 10px;
+          background-color: #5db400;
         }
       `}</style>
       <div
         style={{
-          // props.xxにしてもOK
           width: 560,
           height: 315,
           border: "1px solid red"
         }}
         className={"Challenge"}
       >
-        {/* <Commentary {...props} /> */}
-        {/* <button onClick={openModal}>Open Modal</button> */}
-        <h1>
-          <a href={props.challenge_url}>{props.challenge_name}</a>
-        </h1>
-        <button onClick={showModal}>Show modal</button>
-
+        <button onClick={showModal} className={"ModalButton"}>
+          {props.challenge_name}の回答を見る
+        </button>
       </div>
     </>
   );
