@@ -14,6 +14,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
+      # - name: Create dot env file
+      #   run: echo "${{ secrets.ENV_SHEETSON }}" > .env
       - name: Update Data
         run: yarn install && yarn update-data
         env:
@@ -24,3 +26,6 @@ jobs:
         with:
           message: "Update Data"
           push: true
+
+    # env:
+    #   ENV_SHEETSON: ${{ secrets.ENV_SHEETSON }}

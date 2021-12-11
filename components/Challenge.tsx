@@ -23,8 +23,8 @@ const Challenge = (props: Challenge) => {
     return (
       <Modal isOpen style={customStyles} contentLabel="Example Modal">
         <h2>解説</h2>
-        <div>{props.example}</div>
-        <p>{props.commentary}</p>
+        <div>{props.challenge_example}</div>
+        <p>{props.challenge_commentary}</p>
         <button onClick={hideModal}>Close</button>
       </Modal>
     );

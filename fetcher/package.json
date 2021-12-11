@@ -13,6 +13,7 @@
       "prettier --write"
     ]
   },
+  "type": "module",
   "prettier": {
     "printWidth": 120,
     "singleQuote": false,
@@ -20,6 +21,7 @@
     "trailingComma": "none"
   },
   "scripts": {
+    "update": "node --require dotenv/config --loader ts-node/esm src/updateData.ts",
     "format": "prettier --write \"**/*.{js,jsx,tsx,ts,css}\"",
     "dev": "next dev",
     "build": "next build",
