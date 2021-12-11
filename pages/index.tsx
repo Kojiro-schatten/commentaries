@@ -4,7 +4,8 @@ import { InView } from "react-intersection-observer";
 import Image from "next/image";
 import Commentary from "./Components/Commentary";
 import { Challenge } from "../types/index";
-import Modal from 'react-modal';
+import Modal from "react-modal";
+import { useModal, ModalProvider } from "react-modal-hook";
 
 // プロジェクトのモジュールをグローバルに宣言する。
 // declare module "react" しているのは、next内でstyled-componentsを使っているから
@@ -15,35 +16,35 @@ declare module "react" {
     global?: boolean;
   }
 }
-Modal.setAppElement('#__next')
+Modal.setAppElement("#__next");
 
 const Challenge = (props: Challenge) => {
+  console.log(props);
   const customStyles = {
     content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)"
+    }
   };
 
-  let subtitle: HTMLHeadingElement;
-  const [modalIsOpen, setIsOpen] = useState(false);
+  let subtitle: HTMLHeadingElement | null;
+  // showModal,hideModalそのまま渡すことで、react-modal-hook側で勝手にtrue/falseのスイッチ判定を行ってくれる
+  const [showModal, hideModal] = useModal(() => {
+    console.log(showModal, hideModal);
+    return (
+      <Modal isOpen style={customStyles} contentLabel="Example Modal">
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>解説</h2>
+        <div>{props.example}</div>
+        <p>{props.commentary}</p>
+        <button onClick={hideModal}>Close</button>
+      </Modal>
+    );
+  });
 
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
   return (
     <>
       <style jsx>{`
@@ -66,22 +67,13 @@ const Challenge = (props: Challenge) => {
         }}
         className={"Challenge"}
       >
-        <Commentary {...props} />
-        <button onClick={openModal}>Open Modal</button>
-        <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-          >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-          <button onClick={closeModal}>close</button>
-          <div>ここに解説が入る</div>
-        </Modal>
-          <h1>
+        {/* <Commentary {...props} /> */}
+        {/* <button onClick={openModal}>Open Modal</button> */}
+        <h1>
           <a href={props.challenge_url}>{props.challenge_name}</a>
         </h1>
+        <button onClick={showModal}>Show modal</button>
+
       </div>
     </>
   );
@@ -344,4 +336,9 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+const Home = () => (
+  <ModalProvider>
+    <HomePage />
+  </ModalProvider>
+);
+export default Home;
