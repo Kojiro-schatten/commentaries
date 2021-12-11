@@ -7,10 +7,11 @@ type ToggleProps = {
 };
 
 const Toggle = (props: ToggleProps) => {
+  console.log(props.left, props.right, props?.onChange)
   const [checked, setChecked] = useState(props.left.value);
   const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setChecked(event.target.value);
-    props.onChange(event.target.value);
+    props?.onChange(event.target.value);
   };
   return (
     <>

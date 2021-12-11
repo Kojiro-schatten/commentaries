@@ -1,6 +1,6 @@
 import { InView } from "react-intersection-observer";
 import Image from "next/image";
-import challenge from '../challenges.json'
+import challenge from '../pages/challenges.json'
 import { useMemo } from "react";
 
 const LeftContent = (props: typeof challenge[0]) => {

@@ -1,4 +1,4 @@
-import { Challenge } from "../../types/index";
+import { Challenge } from "../types/index";
 import Modal from "react-modal";
 import { useModal } from "react-modal-hook";
 
@@ -17,13 +17,12 @@ const Challenge = (props: Challenge) => {
     }
   };
 
-  let subtitle: HTMLHeadingElement | null;
   // showModal,hideModalそのまま渡すことで、react-modal-hook側で勝手にtrue/falseのスイッチ判定を行ってくれる
   const [showModal, hideModal] = useModal(() => {
     console.log(showModal, hideModal);
     return (
       <Modal isOpen style={customStyles} contentLabel="Example Modal">
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>解説</h2>
+        <h2>解説</h2>
         <div>{props.example}</div>
         <p>{props.commentary}</p>
         <button onClick={hideModal}>Close</button>

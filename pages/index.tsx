@@ -1,10 +1,10 @@
 import challenge from "./challenges.json";
-import { ChangeEventHandler, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
-import Challenge from "./Components/Challenge";
+import Challenge from "../components/Challenge";
 import { ModalProvider } from "react-modal-hook";
-import LeftContent from "./Components/LeftContent";
-import Toggle from "./Components/Toggle";
+import LeftContent from "../components/LeftContent";
+import Toggle from "../components/Toggle";
 
 // プロジェクトのモジュールをグローバルに宣言する。
 // declare module "react" しているのは、next内でstyled-componentsを使っているから
