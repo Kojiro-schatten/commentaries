@@ -4,6 +4,7 @@ import { InView } from "react-intersection-observer";
 import Image from "next/image";
 import Commentary from "./Components/Commentary";
 import { Challenge } from "../types/index";
+import Modal from 'react-modal';
 
 // プロジェクトのモジュールをグローバルに宣言する。
 // declare module "react" しているのは、next内でstyled-componentsを使っているから
@@ -14,8 +15,35 @@ declare module "react" {
     global?: boolean;
   }
 }
+Modal.setAppElement('#__next')
 
 const Challenge = (props: Challenge) => {
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  let subtitle: HTMLHeadingElement;
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
     <>
       <style jsx>{`
@@ -39,7 +67,19 @@ const Challenge = (props: Challenge) => {
         className={"Challenge"}
       >
         <Commentary {...props} />
-        <h1>
+        <button onClick={openModal}>Open Modal</button>
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+          >
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+          <button onClick={closeModal}>close</button>
+          <div>ここに解説が入る</div>
+        </Modal>
+          <h1>
           <a href={props.challenge_url}>{props.challenge_name}</a>
         </h1>
       </div>
