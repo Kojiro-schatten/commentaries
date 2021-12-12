@@ -14,5 +14,21 @@
     "challenge_example": "type MyReadonly<K> = { readonly [key in keyof K]: K[key]}",
     "challenge_commentary": "ここに解説が入ります",
     "challenge_type": "type_challenges"
+  },
+  {
+    "rowIndex": 4,
+    "challenge_name": "Tuple to Object",
+    "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/11-easy-tuple-to-object/README.md",
+    "challenge_example": "type TupleToObject<T extends readonly string[]> = { [K in T[number]]: K }",
+    "challenge_commentary": "ここに解説が入ります",
+    "challenge_type": "type_challenges"
+  },
+  {
+    "rowIndex": 5,
+    "challenge_name": "First of Array",
+    "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/14-easy-first/README.md",
+    "challenge_example": "type First<T extends any[]> = T['length'] extends 0 ? never : T[0];",
+    "challenge_commentary": "ここに解説が入ります",
+    "challenge_type": "type_challenges"
   }
 ]
