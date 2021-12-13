@@ -4,7 +4,7 @@
     "challenge_name": "Pick",
     "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/4-easy-pick/README.md",
     "challenge_example": "type MyPick<T, K extends keyof T> = {[key in K]: T[key]}",
-    "challenge_commentary": "ここに解説が入ります",
+    "challenge_commentary": "type MyPick<T, K extends keyof T> = {[key in K]: T[key]}\ntype cases = [\n Expect<Equal<Expected1, MyPick<Todo, 'title'>>>,\n Expect<Equal<Expected2, MyPick<Todo, 'title' | 'completed'>>>,\n // @ts-expect-error\n MyPick<Todo, 'title' | 'completed' | 'invalid'>,\n]\ninterface Todo {\n title: string\n description: string\n completed: boolean\n}\ninterface Expected1 {\n title: string\n}\n\n\nTは、TSのプレイグラウンド上ではTodoインターフェースとされている。\n\nKはExpected1,2,3インターフェースのようにTodoのkeyのどれかを持っている。\n\nkeyofを使ってオブジェクトキーを渡せば、Kはそのオブジェクトキーのいずれかを取るUnionTypeになる。\n\n \n\n最後に出てくるT[key]は、Tに対してkey型でアクセスして得られる型。keyがkeyof Tを満たすtypeであれば、\n\ntype sample = T['keeeey']\n\nなら、Tのtypeはstringになる。T['number']で数値型にアクセスしているなら、numberになる。\n\n \n\n最後に、{[key in K] の部分は mappedTypes であり、例えば\n\ntype T1 = { [P in \"x\" | \"y\"]: number };  // { x: number, y: number }\n\nと、この場合 \"x\"と\"y\"は、number型になる。\n今回、[key in K]: T[key]となってい流ので、key in Kの値は、T[key]になる。",
     "challenge_type": "type_challenges"
   },
   {
