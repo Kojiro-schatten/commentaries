@@ -12,7 +12,7 @@
     "challenge_name": "ReadOnly",
     "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/7-easy-readonly/README.md",
     "challenge_example": "type MyReadonly<K> = { readonly [key in keyof K]: K[key]}",
-    "challenge_commentary": "ここに解説が入ります",
+    "challenge_commentary": "const と readonlyの違い\nhttps://typescript-jp.gitbook.io/deep-dive/type-system/readonly#consttono\n\nconst\n1.変数参照に利用する\n2.他の値を再度割り当てることはできない\nreadonly\n1.プロパティに利用するものである\n2.エイリアシングによってプロパティが変更されることがありえる\n\nkeyofで型からkeyというプロパティを取り出す。\nin により、順次処理T[key]型からプロパティ型(string, boolean)を取り出す。\nK[key]はPickで解説したので省く",
     "challenge_type": "type_challenges"
   },
   {
@@ -20,7 +20,7 @@
     "challenge_name": "Tuple to Object",
     "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/11-easy-tuple-to-object/README.md",
     "challenge_example": "type TupleToObject<T extends readonly string[]> = { [K in T[number]]: K }",
-    "challenge_commentary": "ここに解説が入ります",
+    "challenge_commentary": "type TupleToObject<T extends readonly string[]> = { [K in T[number]]: K }\n\nzennの記事から、T[number]のnumberは numeric index signatureを持っているため、number で indexing ができる。\nつまり、\n\nconst tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const\n\nは、\n\ninterface tuple { length:4; 0:\"tesla\"; 1:\"model 3\"; 2:\"model X\"; 3:\"model Y\"; }\n\n\nと同義であり、T[number] = 要素の数とどの要素がどの位置(index)にあるかが決まってる配列型の一種である。(lengthは、ts側で勝手に持ってくれてる？)\n\n \n参考\nhttps://qiita.com/Quramy/items/e27a7756170d06bef22a#tk\nhttps://zenn.dev/luvmini511/articles/d89b3ad241e544",
     "challenge_type": "type_challenges"
   },
   {
@@ -28,7 +28,15 @@
     "challenge_name": "First of Array",
     "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/14-easy-first/README.md",
     "challenge_example": "type First<T extends any[]> = T['length'] extends 0 ? never : T[0];",
-    "challenge_commentary": "ここに解説が入ります",
+    "challenge_commentary": "T['length']を使い、length が0ならneverを返し、そうじゃなければT[0]を返す",
+    "challenge_type": "type_challenges"
+  },
+  {
+    "rowIndex": 6,
+    "challenge_name": "Awaited",
+    "challenge_url": "https://github.com/type-challenges/type-challenges/blob/master/questions/189-easy-awaited/README.md",
+    "challenge_example": "type MyAwaited<T extends Promise<any>> = T extends Promise<infer R> ? (R extends Promise<infer K> ? K : R) : never",
+    "challenge_commentary": "Promise<any>>\n\nのanyはPromiseの返り値を指しており、今回は\n\ntype X = Promise<string>\ntype Y = Promise<{ field: number }>\ntype Z = Promise<Promise<string | number>>\n\nと、string, {}, numberのどれかなので、\n\nPromise<string | Object>\n\nみたいにしてもOK。\nObject型についてはダックタイピングの話が出てくるので、こちらも追って見ていくべき。\nhttps://marsquai.com/a70497b9-805e-40a9-855d-1826345ca65f/1dc3824a-2ab9-471f-ad58-6226a37245ce/9a50771d-825f-4186-a56e-ba5f0d07b0e8/\n\nT extends Promise<infer R>\n\nLength of Tuple問題でも出てきたinfer\n今回取り出したい型名はRとして、Tがなんなのかは型が実際に使用される際に照合される。今回は、Promise<infer R>がtrueとなった時に、その値が次の\n\n(R extends Promise<infer K> ? K : R)\n\nに続いていく。falseなら、neverで終了。\n\n(R extends Promise<infer K> ? K : R)\n\nだが、ここではさらに、RはPromise<infer K>がtrueとなった時にKを、falseならRを出力している。\nコレが必要なのは、typeの3つ目で\n\ntype Z = Promise<Promise<string | number>>\n\nと、typeのなかで、Promiseの判定を行なっているからである。\n \n非同期の型パズルに関しては、こちらの記事も良かった。\nhttps://qiita.com/yutaro-t/items/4b0582e1fbe311e5717e",
     "challenge_type": "type_challenges"
   }
 ]
